@@ -77,7 +77,7 @@ app.post("/api/contacts", function (req, res) {
     db.collection(CONTACTS_COLLECTION).insertOne(newContact, function (err, doc) {
       if (err) {
         handleError(res, err.message, "Failed to create new contact.");
-      } else {
+      } else { //s updates the page but removing it doesn't stops/intervenes with the database operation.
         res.status(201).json(doc.ops[0]);
       }
     });
@@ -103,17 +103,26 @@ app.get("/api/contacts/:id", function (req, res) {
 });
 
 app.put("/api/contacts/:id", function (req, res) {
-  var updateDoc = req.body;
+  var updateDoc = req.body; //updated contact
+  console.log(updateDoc);
+
   delete updateDoc._id;
+  //wtf  was the default deleting the id?? NOO
+  //delete updateDoc._id;  
+  console.log(new ObjectID(req.params.id) + " is good oid requests");
+  console.log(new ObjectID(req.body._id) + " is alternative good oid requests");
 
   db.collection(CONTACTS_COLLECTION).updateOne({
     _id: new ObjectID(req.params.id)
-  }, updateDoc, function (err, doc) {
+  }, {
+    $set: updateDoc
+  }, function (err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update contact");
     } else {
       updateDoc._id = req.params.id;
       res.status(200).json(updateDoc);
+      //console.log("API GOOD ON UPDATE");
     }
   });
 });

@@ -36,6 +36,7 @@ export class ContactService {
 
   // put("/api/contacts/:id")
   updateContact(putContact: Contact): Promise<void | Contact> {
+    console.log(putContact);
     var putUrl = this.contactsUrl + '/' + putContact._id;
     return this.http.put(putUrl, putContact)
       .toPromise()
@@ -47,5 +48,6 @@ export class ContactService {
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
+    return Promise.reject(errMsg);
   }
 }

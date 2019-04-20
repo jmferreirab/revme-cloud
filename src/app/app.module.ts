@@ -20,7 +20,7 @@ import { ContactListComponent } from './contacts/contact-list/contact-list.compo
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [],//maybe it should have contactservice
   bootstrap: [AppComponent]
 })
 export class AppModule { }

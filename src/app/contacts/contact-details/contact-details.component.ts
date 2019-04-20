@@ -5,7 +5,8 @@ import { ContactService } from '../contact.service';
 @Component({
   selector: 'contact-details',  //maybe it should be app-conta....
   templateUrl: './contact-details.component.html',
-  styleUrls: ['./contact-details.component.css']
+  styleUrls: ['./contact-details.component.css'],
+  providers: [ContactService]
 })
 
 export class ContactDetailsComponent {
@@ -28,6 +29,7 @@ export class ContactDetailsComponent {
   }
 
   updateContact(contact: Contact): void {
+    console.log(contact);
     this.contactService.updateContact(contact).then((updatedContact: Contact) => {
       this.updateHandler(updatedContact);
     });
