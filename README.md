@@ -1,6 +1,7 @@
 # MEANRevMe
 
 Fullstack project based on MEAN Tutorial on Heroku [In construction]
+This project is meant to provide a small component of the functionality that social networks provide, the "posting" ability.
 
 ## Code scaffolding
 
